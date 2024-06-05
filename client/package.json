@@ -1,0 +1,22 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen": "openapi-ts && npx esbuild ./src/index.ts --bundle --outdir=. --format=iife --global-name=api --target=es2017 --platform=browser --define:global=window"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FelixWieland/DHBW-TI23-WebEng2Lab-Project"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.46.3",
+    "esbuild": "^0.21.4"
+  },
+  "private": true,
+  "dependencies": {
+    "@hey-api/client-fetch": "^0.1.3",
+    "typescript": "^5.4.5"
+  }
+}
