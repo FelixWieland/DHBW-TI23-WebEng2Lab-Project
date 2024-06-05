@@ -6,7 +6,31 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <!-- Einbinden der datei !-->
     <script src="index.js"></script>
+
+    <script>
+        // Erstellt einen client zu http://localhost:8080
+        api.initDevClient()
+
+        // Listet songs auf
+        api.readSongs().then(songs => console.log(songs))
+
+        // Erstellt einen song
+        api.createSong({
+            body: {
+                title: "Name",
+                producer: "blablabla",
+                duration: 320, // Sekunden,
+                release_date: new Date().toISOString(),
+                genres: [],
+                albums: [],
+                artists: []
+            }
+        }).then(id => console.log(id))
+
+    </script>
+
 </head>
 <body>
 
