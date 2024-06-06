@@ -12,21 +12,18 @@ import java.util.List;
 @Configuration
 public class OpenAPIConfiguration {
 
+
     @Bean
     public OpenAPI defineOpenApi() {
         Server server = new Server();
         server.setUrl("http://localhost:8080");
         server.setDescription("Development");
 
-        Contact contact = new Contact();
-        contact.setName("Jane Doe");
-        contact.setEmail("your.email@gmail.com");
 
         Info information = new Info()
-                .title("Employee Management System API")
+                .title("Musikkatalog API")
                 .version("1.0")
-                .description("This API exposes endpoints to manage employees.")
-                .contact(contact);
+                .description("This API exposes endpoints to manage music.");
 
         return new OpenAPI().info(information).servers(List.of(server));
     }

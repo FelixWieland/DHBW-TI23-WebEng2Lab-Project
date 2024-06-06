@@ -14,6 +14,8 @@
         // Erstellt einen client zu http://localhost:8080
         api.initDevClient()
 
+
+
         // Listet songs auf
         api.readSongs().then(songs => console.log(songs))
 
@@ -33,6 +35,36 @@
     </script>
 </head>
 <body>
+    <img src="http://localhost:8080/files/song/cover/{song_id}" alt="song-cover" />
+    <img src="http://localhost:8080/files/album/cover/{album_id}" alt="album-cover" />
+    <img src="http://localhost:8080/files/artist/profile/{artist_id}" alt="artist-profile-picture" />
 
+    <audio controls>
+        <source src="http://localhost:8080/files/song/audio/{song_id}.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Upload Song cover !-->
+    <form action="http://localhost:8080/files/song/cover/{song_id}" method="post" enctype="multipart/form-data">
+        <input name="file" type="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Upload Album cover !-->
+    <form action="http://localhost:8080/files/album/cover/{album_id}" method="post" enctype="multipart/form-data">
+        <input name="file" type="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Upload Artist Profile picture !-->
+    <form action="http://localhost:8080/files/artist/profile/{artist_id}" method="post" enctype="multipart/form-data">
+        <input name="file" type="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Upload Song Audio Mp3 !-->
+    <form action="http://localhost:8080/files/song/audio/{song_id}" method="post" enctype="multipart/form-data">
+        <input name="file" type="file" accept="audio/*">
+        <button type="submit">Upload</button>
+    </form>
 </body>
 </html>

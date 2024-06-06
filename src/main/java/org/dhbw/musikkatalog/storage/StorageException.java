@@ -1,2 +1,12 @@
-package org.dhbw.musikkatalog.storage;public class StorageException {
+package org.dhbw.musikkatalog.storage;
+
+public class StorageException extends RuntimeException {
+
+    public StorageException(String message) {
+        super(message);
+    }
+
+    public StorageException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

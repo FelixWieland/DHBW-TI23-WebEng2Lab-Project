@@ -1,6 +1,6 @@
 package org.dhbw.musikkatalog.model;
 
-public enum ArtistVariants {
+public enum ArtistVariant {
     SINGER,
     RAPPER,
     BAND

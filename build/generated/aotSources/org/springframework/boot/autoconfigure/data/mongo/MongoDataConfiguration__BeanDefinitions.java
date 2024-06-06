@@ -2,7 +2,7 @@ package org.springframework.boot.autoconfigure.data.mongo;
 
 import java.lang.Class;
 import java.util.List;
-import org.dhbw.musikkatalog.model.Post;
+import org.dhbw.musikkatalog.model.Song;
 import org.springframework.aot.generate.Generated;
 import org.springframework.beans.factory.aot.BeanInstanceSupplier;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -33,7 +33,7 @@ public class MongoDataConfiguration__BeanDefinitions {
    */
   private static InstanceSupplier<MongoManagedTypes> mongoManagedTypesInstance() {
     return (registeredBean ->  {
-      List<Class<?>> types = List.of(Post.class);
+      List<Class<?>> types = List.of(Song.class);
       ManagedTypes managedTypes = ManagedTypes.fromIterable(types);
       return MongoManagedTypes.from(managedTypes);
     } );

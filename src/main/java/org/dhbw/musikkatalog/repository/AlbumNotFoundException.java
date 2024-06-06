@@ -1,8 +1,8 @@
 package org.dhbw.musikkatalog.repository;
 
-public class ArtistNotFoundException extends RuntimeException {
+public class AlbumNotFoundException extends RuntimeException {
 
     public String toErrorResponse() {
-        return "Artist not found";
+        return "Album not found";
     }
 }

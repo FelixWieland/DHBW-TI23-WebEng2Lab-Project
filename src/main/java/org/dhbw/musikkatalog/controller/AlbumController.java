@@ -2,12 +2,12 @@ package org.dhbw.musikkatalog.controller;
 
 import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import lombok.AllArgsConstructor;
+import org.dhbw.musikkatalog.model.Album;
 import org.dhbw.musikkatalog.model.Artist;
-import org.dhbw.musikkatalog.model.Song;
+import org.dhbw.musikkatalog.repository.AlbumNotFoundException;
+import org.dhbw.musikkatalog.repository.AlbumRepository;
 import org.dhbw.musikkatalog.repository.ArtistNotFoundException;
-import org.dhbw.musikkatalog.repository.ArtistRepository;
 import org.dhbw.musikkatalog.repository.SongNotFoundException;
-import org.dhbw.musikkatalog.repository.SongRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,26 +15,33 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @AllArgsConstructor
 @OpenAPI30
-public class ArtistController {
+public class AlbumController {
 
-    private ArtistRepository artistRepository;
+    private AlbumRepository albumRepository;
 
-    @GetMapping("/artists")
-    public List<Artist> readArtists() {
-        return this.artistRepository.findAll();
+    @GetMapping("/albums")
+    public List<Album> readAlbums() {
+        return this.albumRepository.findAll();
     }
 
-    @PostMapping("/artists")
-    public long createArtist(@RequestBody @Validated Artist artist) {
-        return this.artistRepository.save(artist).getId();
+    @PostMapping("/albums")
+    public Album createAlbum(@RequestBody @Validated Album album) {
+        return this.albumRepository.save(album);
     }
 
-    @GetMapping("/artists/{id}")
-    public ResponseEntity<Artist> readArtist(@PathVariable long id) {
-        var post = this.artistRepository.findById(id);
+    /*
+    @PostMapping("/albums/artist/{id}")
+    public String readAlbumsOfArtist(@PathVariable String id) {
+    }
+    */
+
+    @GetMapping("/albums/{id}")
+    public ResponseEntity<Album> readAlbum(@PathVariable String id) {
+        var post = this.albumRepository.findById(id);
         if (post.isEmpty()) {
             throw new ArtistNotFoundException();
         }
@@ -42,19 +49,19 @@ public class ArtistController {
         return ResponseEntity.ok(post.get());
     }
 
-    @PutMapping("/artist/{id}")
-    public Artist updatePost(@RequestBody Artist artist) {
-        return this.artistRepository.save(artist);
+    @PutMapping("/album")
+    public Album updateAlbum(@RequestBody Album album) {
+        return this.albumRepository.save(album);
     }
 
-    @DeleteMapping("/artist/{id}")
-    public void deleteSong(@PathVariable long id) {
-        this.artistRepository.deleteById(id);
+    @DeleteMapping("/album/{id}")
+    public void deleteAlbum(@PathVariable String id) {
+        this.albumRepository.deleteById(id);
     }
 
-    @ExceptionHandler(value = ArtistNotFoundException.class)
+    @ExceptionHandler(value = AlbumNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handleArtistNotFoundException(SongNotFoundException exception) {
+    public String handleAlbumNotFoundException(SongNotFoundException exception) {
         return exception.toErrorResponse();
     }
 }

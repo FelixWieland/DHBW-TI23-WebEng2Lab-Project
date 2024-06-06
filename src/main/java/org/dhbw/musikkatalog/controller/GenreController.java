@@ -3,11 +3,12 @@ package org.dhbw.musikkatalog.controller;
 import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import lombok.AllArgsConstructor;
 import org.dhbw.musikkatalog.model.Artist;
+import org.dhbw.musikkatalog.model.Genre;
 import org.dhbw.musikkatalog.model.Song;
 import org.dhbw.musikkatalog.repository.ArtistNotFoundException;
-import org.dhbw.musikkatalog.repository.ArtistRepository;
+import org.dhbw.musikkatalog.repository.GenreNotFoundException;
+import org.dhbw.musikkatalog.repository.GenreRepository;
 import org.dhbw.musikkatalog.repository.SongNotFoundException;
-import org.dhbw.musikkatalog.repository.SongRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,46 +16,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @AllArgsConstructor
 @OpenAPI30
-public class ArtistController {
+public class GenreController {
 
-    private ArtistRepository artistRepository;
+    private GenreRepository genreRepository;
 
-    @GetMapping("/artists")
-    public List<Artist> readArtists() {
-        return this.artistRepository.findAll();
+    @GetMapping("/genres")
+    public List<Genre> readGenres() {
+        return this.genreRepository.findAll();
     }
 
-    @PostMapping("/artists")
-    public long createArtist(@RequestBody @Validated Artist artist) {
-        return this.artistRepository.save(artist).getId();
+    @PostMapping("/genres")
+    public Genre createGenre(@RequestBody @Validated Genre genre) {
+        return this.genreRepository.save(genre);
     }
 
-    @GetMapping("/artists/{id}")
-    public ResponseEntity<Artist> readArtist(@PathVariable long id) {
-        var post = this.artistRepository.findById(id);
+    @GetMapping("/genres/{id}")
+    public ResponseEntity<Genre> readGenre(@PathVariable String id) {
+        var post = this.genreRepository.findById(id);
         if (post.isEmpty()) {
-            throw new SongNotFoundException();
+            throw new GenreNotFoundException();
         }
         // ResponseEntity.notFound(); <- HTTP Status Codes
         return ResponseEntity.ok(post.get());
     }
 
-    @PutMapping("/artist/{id}")
-    public Artist updatePost(@RequestBody Artist artist) {
-        return this.artistRepository.save(artist);
+    @PutMapping("/genres")
+    public Genre updateGenre(@RequestBody Genre genre) {
+        return this.genreRepository.save(genre);
     }
 
-    @DeleteMapping("/songs/{id}")
-    public void deleteSong(@PathVariable long id) {
-        this.artistRepository.deleteById(id);
+    @DeleteMapping("/genres/{id}")
+    public void deleteGenre(@PathVariable String id) {
+        this.genreRepository.deleteById(id);
     }
 
-    @ExceptionHandler(value = ArtistNotFoundException.class)
+    @ExceptionHandler(value = GenreNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public String handleArtistNotFoundException(SongNotFoundException exception) {
+    public String handleGenreNotFoundException(SongNotFoundException exception) {
         return exception.toErrorResponse();
     }
 }

@@ -2,7 +2,7 @@ package org.dhbw.musikkatalog.repository;
 
 import java.lang.Class;
 import java.lang.Long;
-import org.dhbw.musikkatalog.model.Post;
+import org.dhbw.musikkatalog.model.Song;
 import org.springframework.aot.generate.Generated;
 import org.springframework.beans.factory.aot.BeanInstanceSupplier;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.support.MongoRepositoryFactor
 import org.springframework.data.repository.query.QueryLookupStrategy;
 
 /**
- * Bean definitions for {@link PostRepository}.
+ * Bean definitions for {@link SongRepository}.
  */
 @Generated
 public class PostRepository__BeanDefinitions {
@@ -31,7 +31,7 @@ public class PostRepository__BeanDefinitions {
    */
   public static BeanDefinition getPostRepositoryBeanDefinition() {
     RootBeanDefinition beanDefinition = new RootBeanDefinition(MongoRepositoryFactoryBean.class);
-    beanDefinition.setTargetType(ResolvableType.forClassWithGenerics(MongoRepositoryFactoryBean.class, PostRepository.class, Post.class, Long.class));
+    beanDefinition.setTargetType(ResolvableType.forClassWithGenerics(MongoRepositoryFactoryBean.class, SongRepository.class, Song.class, Long.class));
     beanDefinition.setLazyInit(false);
     beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0, "org.dhbw.dhbwtiwebeng2labspringbootlearning.repository.PostRepository");
     beanDefinition.getPropertyValues().addPropertyValue("queryLookupStrategyKey", QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND);

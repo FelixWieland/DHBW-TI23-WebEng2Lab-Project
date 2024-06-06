@@ -397,7 +397,7 @@
     "allDeclaredMethods": true
   },
   {
-    "name": "io.swagger.v3.oas.models.media.UUIDSchema",
+    "name": "io.swagger.v3.oas.models.media.StringSchema",
     "allDeclaredFields": true,
     "allDeclaredConstructors": true,
     "allDeclaredMethods": true
@@ -741,7 +741,7 @@
     "name": "java.util.stream.Stream"
   },
   {
-    "name": "java.util.UUID"
+    "name": "java.util.String"
   },
   {
     "name": "javax.money.MonetaryAmount"
@@ -954,7 +954,7 @@
       {
         "name": "setId",
         "parameterTypes": [
-          "java.util.UUID"
+          "java.util.String"
         ]
       },
       {
@@ -4019,7 +4019,7 @@
         "parameterTypes": [ ]
       },
       {
-        "name": "getUuidRepresentation",
+        "name": "getStringRepresentation",
         "parameterTypes": [ ]
       },
       {
@@ -4093,9 +4093,9 @@
         ]
       },
       {
-        "name": "setUuidRepresentation",
+        "name": "setStringRepresentation",
         "parameterTypes": [
-          "org.bson.UuidRepresentation"
+          "org.bson.StringRepresentation"
         ]
       }
     ]
