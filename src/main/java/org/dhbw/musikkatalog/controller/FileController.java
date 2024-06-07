@@ -65,25 +65,25 @@ public class FileController {
     }
 
     @PostMapping(path = "/files/song/cover/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String handleSongCoverUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable long id) {
+    public String handleSongCoverUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable String id) {
         storageService.store(file, String.format("song/cover/%s.png", id));
         return "redirect:/";
     }
 
     @PostMapping(path = "/files/album/cover/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String handleAlbumCoverUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable long id) {
+    public String handleAlbumCoverUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable String id) {
         storageService.store(file, String.format("album/cover/%s.png", id));
         return "redirect:/";
     }
 
     @PostMapping(path = "/files/artist/profile/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String handleArtistProfileUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable long id) {
+    public String handleArtistProfileUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable String id) {
         storageService.store(file, String.format("artist/profile/%s.png", id));
         return "redirect:/";
     }
 
     @PostMapping(path = "/files/song/audio/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String handleSongAudioUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable long id) {
+    public String handleSongAudioUpload(@RequestPart(value = "file") MultipartFile file, @PathVariable String id) {
         System.out.println(file.getName());
         storageService.store(file, String.format("song/audio/%s.mp3", id));
         return "redirect:/";
@@ -93,6 +93,12 @@ public class FileController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public String handleFileNotFoundException(StorageFileNotFoundException exception) {
         return exception.toErrorResponse();
+    }
+
+    @ExceptionHandler(value = RuntimeException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleRuntimeException(RuntimeException exception) {
+        return "Internal server error";
     }
 
     private void serveFile(String contentType, Resource file, HttpServletResponse response) {

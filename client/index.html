@@ -32,6 +32,8 @@
             }
         }).then(id => console.log(id))
 
+
+
     </script>
 </head>
 <body>
@@ -43,28 +45,34 @@
         <source src="http://localhost:8080/files/song/audio/{song_id}.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Upload Song cover !-->
-    <form action="http://localhost:8080/files/song/cover/{song_id}" method="post" enctype="multipart/form-data">
-        <input name="file" type="file" accept="image/*">
-        <button type="submit">Upload</button>
-    </form>
 
     <!-- Upload Album cover !-->
-    <form action="http://localhost:8080/files/album/cover/{album_id}" method="post" enctype="multipart/form-data">
-        <input name="file" type="file" accept="image/*">
-        <button type="submit">Upload</button>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;" onload="resolvedUpload()"></iframe>
+    <form id="album-cover" action="http://localhost:8080/files/album/cover/1" method="post" enctype="multipart/form-data"  target="dummyframe">
+        <input id="album-cover-file" name="file" type="file" accept="image/*">
+        <button id="upload" style="display: none" type="submit"></button>
     </form>
 
-    <!-- Upload Artist Profile picture !-->
-    <form action="http://localhost:8080/files/artist/profile/{artist_id}" method="post" enctype="multipart/form-data">
-        <input name="file" type="file" accept="image/*">
-        <button type="submit">Upload</button>
-    </form>
 
-    <!-- Upload Song Audio Mp3 !-->
-    <form action="http://localhost:8080/files/song/audio/{song_id}" method="post" enctype="multipart/form-data">
-        <input name="file" type="file" accept="audio/*">
-        <button type="submit">Upload</button>
-    </form>
+    <button id="trigger-upload">Test</button>
+    <script>
+        document.getElementById("trigger-upload").addEventListener("click", () => {
+
+            async function uploadAlbumCover() {
+
+            }
+
+            const prom = new Promise(resolve => {
+                window.finishedUpload = () => resolve()
+            })
+            document.getElementById("upload").click()
+
+
+            window.finishedUpload = () => {
+                console.log(finished)
+            }
+
+        })
+    </script>
 </body>
 </html>

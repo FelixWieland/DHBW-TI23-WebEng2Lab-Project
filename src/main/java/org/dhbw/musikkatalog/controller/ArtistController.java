@@ -57,4 +57,10 @@ public class ArtistController {
     public String handleArtistNotFoundException(SongNotFoundException exception) {
         return exception.toErrorResponse();
     }
+
+    @ExceptionHandler(value = RuntimeException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleRuntimeException(RuntimeException exception) {
+        return "Internal server error";
+    }
 }

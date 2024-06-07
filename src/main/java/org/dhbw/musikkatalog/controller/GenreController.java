@@ -59,4 +59,11 @@ public class GenreController {
     public String handleGenreNotFoundException(SongNotFoundException exception) {
         return exception.toErrorResponse();
     }
+
+    @ExceptionHandler(value = RuntimeException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleRuntimeException(RuntimeException exception) {
+        return "Internal server error";
+    }
+
 }
