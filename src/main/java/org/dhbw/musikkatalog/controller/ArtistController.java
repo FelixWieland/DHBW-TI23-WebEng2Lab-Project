@@ -38,7 +38,6 @@ public class ArtistController {
         if (post.isEmpty()) {
             throw new ArtistNotFoundException();
         }
-        // ResponseEntity.notFound(); <- HTTP Status Codes
         return ResponseEntity.ok(post.get());
     }
 

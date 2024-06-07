@@ -40,7 +40,6 @@ public class GenreController {
         if (post.isEmpty()) {
             throw new GenreNotFoundException();
         }
-        // ResponseEntity.notFound(); <- HTTP Status Codes
         return ResponseEntity.ok(post.get());
     }
 

@@ -33,19 +33,12 @@ public class AlbumController {
         return this.albumRepository.save(album);
     }
 
-    /*
-    @PostMapping("/albums/artist/{id}")
-    public String readAlbumsOfArtist(@PathVariable String id) {
-    }
-    */
-
     @GetMapping("/albums/{id}")
     public ResponseEntity<Album> readAlbum(@PathVariable String id) {
         var post = this.albumRepository.findById(id);
         if (post.isEmpty()) {
             throw new ArtistNotFoundException();
         }
-        // ResponseEntity.notFound(); <- HTTP Status Codes
         return ResponseEntity.ok(post.get());
     }
 

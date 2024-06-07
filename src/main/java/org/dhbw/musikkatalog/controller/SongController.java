@@ -36,7 +36,6 @@ public class SongController {
         if (post.isEmpty()) {
             throw new SongNotFoundException();
         }
-        // ResponseEntity.notFound(); <- HTTP Status Codes
         return ResponseEntity.ok(post.get());
     }
 
